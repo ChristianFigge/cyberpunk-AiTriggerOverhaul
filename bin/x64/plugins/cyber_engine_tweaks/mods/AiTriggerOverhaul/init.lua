@@ -1,13 +1,15 @@
 -- Mod Settings struct
 local settings = {
     ModIsEnabled = true,
-    LoudNoiseStimRange = 12.0,
+    LoudNoiseStimRange = 14.0,
     CommonSoundStimRange = 7.0,
     InvestigateCommonSoundChance = 0.25,
     CommonAttentionLifetime = 2.0,
     UseZoneSpecificChanges = true,
     RadiosAreLoud = true,
-    BodyDisposalIsLoud = true
+    BodyDisposalIsLoud = true,
+    SprintNoiseStimRange = 12.0,
+    SprintNoisePerkReductionFactor = 0.15
 }
 
 -- Init Native Settings UI
@@ -39,7 +41,7 @@ function BuildSettingsMenu(nativeSettings)
     nativeSettings.addSubcategory("/aiTriggerOverhaul/stimRanges", "Stimuli Ranges")
 
     -- path, label, desc, min, max, step, format, currentValue, defaultValue, callback
-    nativeSettings.addRangeFloat("/aiTriggerOverhaul/stimRanges", "Loud Noises", "The range of unusual and loud sounds, like players demolishing a locked door with brute force.", 0, 24, 0.5, "%.1f", settings.LoudNoiseStimRange, 12.0, function(state)
+    nativeSettings.addRangeFloat("/aiTriggerOverhaul/stimRanges", "Loud Noises", "The range of unusual and loud sounds, like players demolishing a locked door with brute force.", 0, 28, 0.5, "%.1f", settings.LoudNoiseStimRange, 14.0, function(state)
         settings.LoudNoiseStimRange = state
         SaveSettings()
     end)
@@ -56,6 +58,16 @@ function BuildSettingsMenu(nativeSettings)
 
     nativeSettings.addSwitch("/aiTriggerOverhaul/stimRanges", "Loud Body Disposal", "If enabled, disposing bodies in a container creates 'Loud Noises'. Otherwise, it has the same stimulus range as 'Common Sounds'.", settings.BodyDisposalIsLoud, true, function(state)
         settings.BodyDisposalIsLoud = state
+        SaveSettings()
+    end)
+
+    nativeSettings.addRangeFloat("/aiTriggerOverhaul/stimRanges", "Sprint Noise", "The loudness of the player's footsteps while sprinting, dashing or sliding. These might alert enemies in the vicinity.\n\nThe Vanilla value is around 6.0 (estimate).", 0, 24, 0.5, "%.1f", settings.SprintNoiseStimRange, 12.0, function(state)
+        settings.SprintNoiseStimRange = state
+        SaveSettings()
+    end)
+
+    nativeSettings.addRangeFloat("/aiTriggerOverhaul/stimRanges", "Sprint Noise Perk Reduction Factor", "The 'Cool' perks Feline Footwork and each level of Ninjutsu can reduce a player's sprinting noise by the specified factor.\nThis factor counts once for each of the mentioned perks that the player has unlocked.\n\nExamples:\nA factor of 0.1 with Feline Footwork plus Ninjutsu Level 2 will result in a noise reduction of 3 * 0.1 = 0.3 -> 30%.\n\nA factor of 0.0 will disable the perk-based reduction altogether.\n\nA factor of 0.25 with all 4 perks unlocked will result in perfectly silent sprinting.", 0, 0.25, 0.01, "%.2f", settings.SprintNoisePerkReductionFactor, 0.15, function(state)
+        settings.SprintNoisePerkReductionFactor = state
         SaveSettings()
     end)
 
@@ -123,4 +135,6 @@ function OverrideRedscriptFunctions()
     Override(settingsPath, "GetUseZoneSpecificChanges;", function() return settings.UseZoneSpecificChanges end)
     Override(settingsPath, "RadiosAreLoud;", function() return settings.RadiosAreLoud end)
     Override(settingsPath, "BodyDisposalIsLoud;", function() return settings.BodyDisposalIsLoud end)
+    Override(settingsPath, "GetSprintNoiseStimRange;", function() return settings.SprintNoiseStimRange end)
+    Override(settingsPath, "GetSprintNoisePerkReductionFactor;", function() return settings.SprintNoisePerkReductionFactor end)
 end

@@ -36,7 +36,7 @@ protected final func MyTriggerArreaEffectDistraction(effectData: ref<AreaEffectD
     };
 
     // Broadcast stimuli
-    let stimType: gamedataStimType = Utils.AiWillInvestigate() ? gamedataStimType.VisualDistract : gamedataStimType.SoundDistraction;
+    let stimType: gamedataStimType = Utils.AiWillInvestigate() ? gamedataStimType.VisualDistract : gamedataStimType.Attention; //SoundDistraction;
     let broadcaster: ref<StimBroadcasterComponent> = target.GetStimBroadcasterComponent();
     if IsDefined(broadcaster) {
         let stimRange: Float = Settings.RadiosAreLoud() ? Settings.GetLoudNoiseStimRange() : Settings.GetCommonSoundStimRange();

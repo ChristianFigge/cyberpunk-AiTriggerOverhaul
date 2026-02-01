@@ -1,10 +1,14 @@
 module AiTriggerOverhaul
 
+/*
+ * Redscript Helper class for Mod Setting values.
+ * The functions here are overwritten by Lua code if Native Settings UI is used (see init.lua).
+ */
 public class Settings {
 
     public static func ModIsEnabled() -> Bool { return true; }
     
-    public static func GetLoudNoiseStimRange() -> Float { return 12.0; }
+    public static func GetLoudNoiseStimRange() -> Float { return 14.0; }
 
     public static func GetCommonSoundStimRange() -> Float { return 7.0; }
 
@@ -19,4 +23,8 @@ public class Settings {
     public static func RadiosAreLoud() -> Bool { return true; }
 
     public static func BodyDisposalIsLoud() -> Bool { return true; }
+
+    public static func GetSprintNoiseStimRange() -> Float { return 12.0; }
+
+    public static func GetSprintNoisePerkReductionFactor() -> Float { return 0.15; }
 }
