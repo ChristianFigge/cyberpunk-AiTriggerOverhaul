@@ -25,7 +25,7 @@ protected final func BroadcastStimuliFootstepSprint(context: ref<StateGameScript
                         stimRange *= 1.0 - (Cast<Float>(felineLvl + ninjutsuLvl) * perkFactor);
                     };
                 };
-                broadcaster.TriggerSingleBroadcast(context.executionOwner, gamedataStimType.FootStepSprint, stimRange);
+                if stimRange > 0.0 { broadcaster.TriggerSingleBroadcast(context.executionOwner, gamedataStimType.FootStepSprint, stimRange); };
             };
         };
     } else {
