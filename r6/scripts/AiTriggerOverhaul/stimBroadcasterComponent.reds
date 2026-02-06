@@ -1,9 +1,10 @@
 module AiTriggerOverhaul
 
 /*
- * For body disposals with prior takedowns, we check our custom stimRanges against the tweakDB ones (if any), and take
- * the greater value of the 2. That way, only weak sauce gets overwritten and hardcore AI overhauls are safe.
+ * Adds custom stimRange for Body Disposals with prior Takedowns (in a single action).
+ * Please note that this bypasses the Vanilla usage of TweakDB values.
  *
+ * Regarding the other ActionTypes:
  * I am unaware of non-lethal disposals. Non-lethal takedowns & grapples remain untouched for now.
  */
 @wrapMethod(StimBroadcasterComponent)
@@ -12,10 +13,7 @@ public final func TriggerNoiseStim(owner: wref<GameObject>, takedownActionType: 
         if IsDefined(owner) {
             let stimRange: Float;
             if Equals(takedownActionType, ETakedownActionType.DisposalTakedown) {
-                stimRange = MaxF(
-                    TweakDBInterface.GetFloat(t"AIGeneralSettings.takedownNoiseRange", 3.00),
-                    Settings.BodyDisposalIsLoud() ? Settings.GetLoudNoiseStimRange() : Settings.GetCommonSoundStimRange()
-                );
+                stimRange = Settings.BodyDisposalIsLoud() ? Settings.GetLoudNoiseStimRange() : Settings.GetCommonSoundStimRange();
 
                 /* With the Vanilla stimType SoundDistraction, it's very easy to get away with dumping a body right in front of
                  * another enemy watching you do it, especially in non-dangerous Zones. StimType.Bullet seems to work better,

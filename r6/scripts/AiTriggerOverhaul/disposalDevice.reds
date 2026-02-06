@@ -1,7 +1,7 @@
 module AiTriggerOverhaul
 
 /*
- * Trigger "sound" stimulus when disposing an unconcious body in a container.
+ * Trigger "sound" stimulus when disposing an unconscious body in a container.
  *
  * Stimuli for body disposals with prior takedowns are handled differently and only indirectly by the DisposalDevice class.
  * In DisposalDevice.TakedownAndDispose(...), StimBroadcasterComponent.TriggerNoiseStim(...) is called, which is hooked 
