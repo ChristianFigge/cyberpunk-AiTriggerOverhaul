@@ -11,9 +11,10 @@ The AI system of Cyberpunk 2077 is actually quite brillant. However, some values
 - Increases various stimuli ranges, categorized by loudness (customizable)
 - Fixes some odd NPC behaviour in Public Zones
 - 100% customizable via Native Settings Mod Menu
+- v0.2: Adds a sprinting noise slider & a sprinting noise reduction mechanic based on stealth perks (Feline Footwork & Ninjutsu)
+- v0.3: Adds customizable "noise" for all major locomotion/movement types (walk, sprint, jumps, landings)
 
-I've kept this mod as non-invasive as possible, using minimal scripting and only hooking functions I really needed to. It doesn't touch the actual AI code at all, but only the functions supposed to activate it.
-As such, it should be compatible with pretty much anything
+For information about the compatibility with other mods, please refer to the [Nexusmods page](https://www.nexusmods.com/cyberpunk2077/mods/27199).
 
 # Installation
 The easiest way of installation would be via the [Nexusmods page](https://www.nexusmods.com/cyberpunk2077/mods/27199).\
@@ -23,6 +24,7 @@ To install this mod manually, just extract the 2 directories '/bin' and '/r6' in
 # Credits
 jac3km4 for the redscript compiler\
 adamsmasher for sharing the [decompiled game scripts](https://codeberg.org/adamsmasher/cyberpunk/src/branch/master) - arguably the greatest modder's resource ever\
+keanuWheeze for [Native Settings UI](https://www.nexusmods.com/cyberpunk2077/mods/3518)\
 rayshader for [NativeDB](https://nativedb.red4ext.com/)\
 CD Projekt Red for releasing the 2.0 patch
 
